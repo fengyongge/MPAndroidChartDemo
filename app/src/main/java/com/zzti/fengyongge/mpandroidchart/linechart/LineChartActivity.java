@@ -1,15 +1,14 @@
-package com.zzti.fengyongge.mpandroidchart;
+package com.zzti.fengyongge.mpandroidchart.linechart;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.SeekBar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -18,21 +17,18 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.zzti.fengyongge.mpandroidchart.R;
 import com.zzti.fengyongge.mpandroidchart.bean.LineChartBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class LineChartActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener,
         OnChartValueSelectedListener {
 
     protected Typeface mTfRegular;
     protected Typeface mTfLight;
-    @BindView(R.id.chart1)
     LineChart mChart;
 
     List<LineChartBean> list = new ArrayList<>();
@@ -43,7 +39,8 @@ public class LineChartActivity extends AppCompatActivity implements SeekBar.OnSe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_line_chart);
-        ButterKnife.bind(this);
+
+        mChart = findViewById(R.id.chart1);
 
         mTfRegular = Typeface.createFromAsset(LineChartActivity.this.getAssets(), "OpenSans-Regular.ttf");
         mTfLight = Typeface.createFromAsset(LineChartActivity.this.getAssets(), "OpenSans-Light.ttf");
@@ -167,9 +164,9 @@ public class LineChartActivity extends AppCompatActivity implements SeekBar.OnSe
         xAxis.setDrawAxisLine(false);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         //自定义x轴显示
-        MyXFormatter formatter = new MyXFormatter(values);
-        xAxis.setLabelCount(7);//显示x个数
-        xAxis.setValueFormatter(formatter);
+//        MyXFormatter formatter = new MyXFormatter(values);
+//        xAxis.setLabelCount(7);//显示x个数
+//        xAxis.setValueFormatter(formatter);
 
         //Y坐标左边
         YAxis leftAxis = mChart.getAxisLeft();
@@ -192,9 +189,8 @@ public class LineChartActivity extends AppCompatActivity implements SeekBar.OnSe
 
 
         // 设置MarkerView
-        MarkerView mv = new MyMarkerView(LineChartActivity.this, R.layout.custom_marker_view);
-//        mChart.setMarkerView(mv);
-        mChart.setMarker(mv);
+//        MarkerView mv = new MyMarkerView(LineChartActivity.this, R.layout.custom_marker_view);
+//        mChart.setMarker(mv);
 
     }
 

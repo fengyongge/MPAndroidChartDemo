@@ -3,4 +3,25 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="common_color_gray_33">#333333</color>
+    <color name="common_color_gray_66">#666666</color>
+    <color name="common_color_ED">#ED5B53</color>
+    <color name="common_color_blue">#347AEB</color>
+    <color name="common_color_assist_brown">#FFAD53</color>
+    <color name="common_color_gray_99">#999999</color>
+    <color name="common_color_gray_f1">#E8E8F1</color>
+    <color name="common_color_white">#FFFFFF</color>
+    <color name="common_color_blue_end_eb">#00347AEB</color>
+    <color name="common_color_blue_start_eb">#1A347AEB</color>
+    <color name="common_color_white_start_eb">#0A347AEB</color>
+    <color name="common_color_white_end_eb">#00347AEB</color>
+
+    <color name="common_color_blue_f9">#0EAFF9</color>
+    <color name="common_color_red_3b">#FB573B</color>
+    <color name="common_color_yellow_43">#FFDC43</color>
+    <color name="common_color_green_a2">#02D6A2</color>
+    <color name="common_color_gray_b7">#A1A4B7</color>
+
+
 </resources>
