@@ -84,6 +84,15 @@
                     android:layout_marginRight="5dp"
                     />
 
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barchart"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginRight="5dp"
+                    />
+
 
 
 
@@ -107,15 +116,6 @@
         app:cardElevation="4dp"
         >
 
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/barchart"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="5dp"
-            />
 
 
     </androidx.cardview.widget.CardView>

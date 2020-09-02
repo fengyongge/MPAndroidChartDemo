@@ -26,7 +26,7 @@ public class GroupedBarChartActivity extends AppCompatActivity {
     BarChart barChart;
     BarChart barchartTemp;
     Context context;
-    int number = 5;
+    int yLablecount = 5;
     float maxY = 60;
     List<String> xAxisValues = new ArrayList<>();
     List<String> valOne = new ArrayList<>();
@@ -44,14 +44,12 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         //
         initData();
         initChart();
-        initAxis();
-        otherBackgroud(maxY,xAxisValues,valOne);
-        setData();
+
     }
 
 
 
-    void otherBackgroud(float maxY,List<String> xList,List<String> yList) {
+    void otherBackgroud(int yLablecount,float maxY,List<String> yList) {
 
         List<List<Float>> yBarDatas = new ArrayList<>();
         //2种直方图
@@ -64,7 +62,7 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         }
 
         CombinedChartManagerOld combineChartManager = new CombinedChartManagerOld(GroupedBarChartActivity.this, barchartTemp);
-        combineChartManager.showCombinedChart(maxY, xList, yBarDatas);
+        combineChartManager.showCombinedChart(yLablecount,maxY, yBarDatas);
 
     }
 
@@ -100,7 +98,6 @@ public class GroupedBarChartActivity extends AppCompatActivity {
     }
 
     void initChart() {
-
         barChart.setDrawBarShadow(false);
         barChart.getDescription().setEnabled(false);
         barChart.setPinchZoom(false);
@@ -108,12 +105,14 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         barChart.getAxisRight().setEnabled(false);
         barChart.getLegend().setEnabled(false);
         barChart.setScaleEnabled(false);
+        //
+        initAxis(yLablecount,maxY);
+        otherBackgroud(yLablecount,maxY,valOne);
+        setData();
     }
 
 
-    void initAxis() {
-
-
+    void initAxis(int yLablecount,float maxY) {
         //设置X轴在底部
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -144,6 +143,7 @@ public class GroupedBarChartActivity extends AppCompatActivity {
             }
         };
         xAxis.setValueFormatter(xValueFormatter);
+        xAxis.setAxisMinimum(-0.5f);
 
 
         YAxis rightYAxis = barChart.getAxisRight();
@@ -162,7 +162,7 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         //设置y轴最大值和最小值，以及分割几份
         leftYAxis.setAxisMaximum(maxY);
         leftYAxis.setAxisMinimum(0f);
-        leftYAxis.setLabelCount(number, true);
+        leftYAxis.setLabelCount(yLablecount, true);
         //y轴坐标处理显示
         ValueFormatter yValueFormatter = new ValueFormatter() {
             @Override

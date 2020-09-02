@@ -52,10 +52,9 @@ public class CombinedChartManagerOld {
     }
 
 
-    public void showCombinedChart(float maxY,
-                                  List<String> xAxisValues, List<List<Float>> barChartYs) {
-        initChart(5,maxY);
-        initAxis(xAxisValues);
+    public void showCombinedChart(int yLablecount,float maxY, List<List<Float>> barChartYs) {
+        initChart();
+        initAxis(yLablecount,maxY);
         mCombinedChart.setData(getBarDataMutly(barChartYs));
         mCombinedChart.invalidate();
     }
@@ -63,7 +62,7 @@ public class CombinedChartManagerOld {
     /**
      * 初始化Chart
      */
-    private void initChart(int number,float maxY) {
+    private void initChart() {
         mCombinedChart.setDrawBarShadow(false);
         mCombinedChart.getDescription().setEnabled(false);
         mCombinedChart.setPinchZoom(false);
@@ -76,11 +75,9 @@ public class CombinedChartManagerOld {
     /**
      * 设置X轴坐标值
      *
-     * @param xAxisValues x轴坐标集合
+     * @param yLablecount x轴坐标集合
      */
-    public void initAxis(final List<String> xAxisValues) {
-        int number = 5;
-        float maxY = 60;
+    public void initAxis(int yLablecount,float maxY) {
 
         //设置X轴在底部
         XAxis xAxis = mCombinedChart.getXAxis();
@@ -97,6 +94,7 @@ public class CombinedChartManagerOld {
         xAxis.setLabelCount(7);
         xAxis.setGranularity(1f);
         xAxis.setAxisMaximum(7f);
+        xAxis.setAxisMinimum(-0.5f);
 
 
         YAxis rightYAxis = mCombinedChart.getAxisRight();
@@ -115,7 +113,7 @@ public class CombinedChartManagerOld {
         //设置y轴最大值和最小值，以及分割几份
         leftYAxis.setAxisMaximum(maxY);
         leftYAxis.setAxisMinimum(0f);
-        leftYAxis.setLabelCount(number, true);
+        leftYAxis.setLabelCount(yLablecount, true);
         //y轴坐标处理显示
         ValueFormatter yValueFormatter = new ValueFormatter() {
             @Override
