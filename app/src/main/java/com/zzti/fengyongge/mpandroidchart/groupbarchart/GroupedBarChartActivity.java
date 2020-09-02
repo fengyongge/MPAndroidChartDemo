@@ -70,13 +70,13 @@ public class GroupedBarChartActivity extends AppCompatActivity {
 
     void initData(){
         xAxisValues.clear();
-        xAxisValues.add("5分钟");
-        xAxisValues.add("10分钟");
-        xAxisValues.add("15分钟");
-        xAxisValues.add("20分钟");
-        xAxisValues.add("25分钟");
-        xAxisValues.add("30分钟");
-        xAxisValues.add("更多");
+        xAxisValues.add("5min");
+        xAxisValues.add("10min");
+        xAxisValues.add("15min");
+        xAxisValues.add("20min");
+        xAxisValues.add("25min");
+        xAxisValues.add("30min");
+        xAxisValues.add("more");
         //
         valOne.clear();
         valOne.add("10");
@@ -143,7 +143,7 @@ public class GroupedBarChartActivity extends AppCompatActivity {
             }
         };
         xAxis.setValueFormatter(xValueFormatter);
-        xAxis.setAxisMinimum(-0.5f);
+
 
 
         YAxis rightYAxis = barChart.getAxisRight();
@@ -180,9 +180,10 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         ArrayList<BarEntry> barOne = new ArrayList<>();
         ArrayList<BarEntry> barTwo = new ArrayList<>();
 
+        //默认会像左偏移0.5f，防止第一个点或者最后一个点不显示，所有需要根据情况加上0.5f
         for (int i = 0; i < valOne.size(); i++) {
-            barOne.add(new BarEntry(i+0.3f , Float.parseFloat(valOne.get(i))));
-            barTwo.add(new BarEntry(i+0.3f , Float.parseFloat(valTwo.get(i))));
+            barOne.add(new BarEntry(i +0.5f, Float.parseFloat(valOne.get(i))));
+            barTwo.add(new BarEntry(i +0.5f, Float.parseFloat(valTwo.get(i))));
         }
 
         BarDataSet set1 = new BarDataSet(barOne, "barOne");
@@ -199,12 +200,12 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
         dataSets.add(set1);
         dataSets.add(set2);
-
-        //(barSpace+barWidth)*柱形图数量+groupSpace=1
         BarData data = new BarData(dataSets);
-        float groupSpace = 0.4f;
+
+        //设置组样式数据---(barSpace+barWidth)*柱形图数量+groupSpace=1
+        float groupSpace = 0.2f;
         float barSpace = 0.1f;
-        float barWidth = 0.2f;
+        float barWidth = 0.3f;
 
         data.setBarWidth(barWidth);
         barChart.setData(data);

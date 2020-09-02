@@ -94,7 +94,7 @@ public class CombinedChartManagerOld {
         xAxis.setLabelCount(7);
         xAxis.setGranularity(1f);
         xAxis.setAxisMaximum(7f);
-        xAxis.setAxisMinimum(-0.5f);
+
 
 
         YAxis rightYAxis = mCombinedChart.getAxisRight();
@@ -137,7 +137,7 @@ public class CombinedChartManagerOld {
             ArrayList<BarEntry> entries = new ArrayList<>();
 
             for (int j = 0; j < barChartYs.get(i).size(); j++) {
-                entries.add(new BarEntry(j, barChartYs.get(i).get(j)));
+                entries.add(new BarEntry(j+0.5f, barChartYs.get(i).get(j)));
             }
 
             BarDataSet barDataSet = new BarDataSet(entries, "");

@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="响应时长统计"
+                android:text="response time"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -73,8 +73,6 @@
                 android:layout_height="wrap_content">
 
 
-
-
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barchartTemp"
                     android:layout_width="match_parent"
@@ -92,8 +90,6 @@
                     android:layout_marginTop="17dp"
                     android:layout_marginRight="5dp"
                     />
-
-
 
 
             </FrameLayout>
