@@ -19,7 +19,7 @@
         <activity android:name=".linechart.LineChartActivity" />
         <activity android:name=".combinedchart.CombinedChartActivity" />
         <activity android:name=".piechart.PieChartActivity"></activity>
-        <activity android:name=".GroupedBarChartActivity"></activity>
+        <activity android:name=".groupbarchart.GroupedBarChartActivity"></activity>
 
     </application>
 

@@ -1,4 +1,4 @@
-package com.zzti.fengyongge.mpandroidchart;
+package com.zzti.fengyongge.mpandroidchart.groupbarchart;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.zzti.fengyongge.mpandroidchart.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -23,10 +24,13 @@ import java.util.List;
 public class GroupedBarChartActivity extends AppCompatActivity {
 
     BarChart barChart;
+    BarChart barchartTemp;
     Context context;
     int number = 5;
     float maxY = 60;
     List<String> xAxisValues = new ArrayList<>();
+    List<String> valOne = new ArrayList<>();
+    List<String> valTwo = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +39,38 @@ public class GroupedBarChartActivity extends AppCompatActivity {
 
         context = GroupedBarChartActivity.this;
         barChart = (BarChart) findViewById(R.id.barchart);
+        barchartTemp = (BarChart) findViewById(R.id.barchartTemp);
 
+        //
+        initData();
         initChart();
+        initAxis();
+        otherBackgroud(maxY,xAxisValues,valOne);
+        setData();
+    }
 
+
+
+    void otherBackgroud(float maxY,List<String> xList,List<String> yList) {
+
+        List<List<Float>> yBarDatas = new ArrayList<>();
+        //2种直方图
+        for (int i = 0; i < 2; i++) {
+            List<Float> yData = new ArrayList<>();
+            for (int j = 1; j <= yList.size(); j++) {
+                yData.add( maxY);
+            }
+            yBarDatas.add(yData);
+        }
+
+        CombinedChartManagerOld combineChartManager = new CombinedChartManagerOld(GroupedBarChartActivity.this, barchartTemp);
+        combineChartManager.showCombinedChart(maxY, xList, yBarDatas);
 
     }
 
-    void setXy(){
+
+
+    void initData(){
         xAxisValues.clear();
         xAxisValues.add("5分钟");
         xAxisValues.add("10分钟");
@@ -50,6 +79,40 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         xAxisValues.add("25分钟");
         xAxisValues.add("30分钟");
         xAxisValues.add("更多");
+        //
+        valOne.clear();
+        valOne.add("10");
+        valOne.add("20");
+        valOne.add("30");
+        valOne.add("40");
+        valOne.add("50");
+        valOne.add("49");
+        valOne.add("40");
+        //
+        valTwo.clear();
+        valTwo.add("60");
+        valTwo.add("50");
+        valTwo.add("30");
+        valTwo.add("40");
+        valTwo.add("20");
+        valTwo.add("30");
+        valTwo.add("30");
+    }
+
+    void initChart() {
+
+        barChart.setDrawBarShadow(false);
+        barChart.getDescription().setEnabled(false);
+        barChart.setPinchZoom(false);
+        barChart.setDrawGridBackground(false);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.getLegend().setEnabled(false);
+        barChart.setScaleEnabled(false);
+    }
+
+
+    void initAxis() {
+
 
         //设置X轴在底部
         XAxis xAxis = barChart.getXAxis();
@@ -57,7 +120,7 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         //展示x轴坐标
         xAxis.setDrawLabels(true);
         xAxis.setTextSize(9f);
-        xAxis.setTextColor(ContextCompat.getColor(context,R.color.common_color_gray_99));
+        xAxis.setTextColor(ContextCompat.getColor(context, R.color.common_color_gray_99));
         //隐藏X轴水平线
         xAxis.setDrawAxisLine(false);
         //隐藏网格线，即竖线
@@ -74,8 +137,8 @@ public class GroupedBarChartActivity extends AppCompatActivity {
             public String getAxisLabel(float value, AxisBase axis) {
                 String xContent = "";
                 //防止出线-1
-                if((int)value>=0&&(int)value<7){
-                    xContent =  xAxisValues.get((int)value);
+                if ((int) value >= 0 && (int) value < 7) {
+                    xContent = xAxisValues.get((int) value);
                 }
                 return xContent;
             }
@@ -91,52 +154,41 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         leftYAxis.setDrawLabels(true);
         leftYAxis.setTextColor(ContextCompat.getColor(context, R.color.common_color_gray_99));
         //设置y轴颜色
-        leftYAxis.setAxisLineColor(ContextCompat.getColor(context,R.color.common_color_gray_f1));
+        leftYAxis.setAxisLineColor(ContextCompat.getColor(context, R.color.common_color_gray_f1));
         //展示Y轴网格线./即横线
         leftYAxis.setDrawGridLines(true);
-        leftYAxis.setGridColor(ContextCompat.getColor(context,R.color.common_color_gray_f1));
+        leftYAxis.setGridColor(ContextCompat.getColor(context, R.color.common_color_gray_f1));
         leftYAxis.setGranularityEnabled(true);
         //设置y轴最大值和最小值，以及分割几份
         leftYAxis.setAxisMaximum(maxY);
         leftYAxis.setAxisMinimum(0f);
         leftYAxis.setLabelCount(number, true);
         //y轴坐标处理显示
-        ValueFormatter yValueFormatter = new ValueFormatter(){
+        ValueFormatter yValueFormatter = new ValueFormatter() {
             @Override
             public String getAxisLabel(float value, AxisBase axis) {
                 return new DecimalFormat("0").format(value);
             }
         };
         leftYAxis.setValueFormatter(yValueFormatter);
+        barChart.invalidate();
     }
 
 
-
-    void initChart(){
-        barChart.setDrawBarShadow(false);
-        barChart.getDescription().setEnabled(false);
-        barChart.setPinchZoom(false);
-        barChart.setDrawGridBackground(false);
-        barChart.getAxisRight().setEnabled(false);
-        barChart.getLegend().setEnabled(false);
-
-        setXy();
-
-        float[] valOne = {10, 20, 30, 40, 50,49,40};
-        float[] valTwo = {60, 50, 40, 30, 20,20,30};
+    void setData() {
 
         ArrayList<BarEntry> barOne = new ArrayList<>();
         ArrayList<BarEntry> barTwo = new ArrayList<>();
 
-        for (int i = 0; i < valOne.length; i++) {
-            barOne.add(new BarEntry(i+0.3f, valOne[i]));
-            barTwo.add(new BarEntry(i+0.3f, valTwo[i]));
+        for (int i = 0; i < valOne.size(); i++) {
+            barOne.add(new BarEntry(i+0.3f , Float.parseFloat(valOne.get(i))));
+            barTwo.add(new BarEntry(i+0.3f , Float.parseFloat(valTwo.get(i))));
         }
 
         BarDataSet set1 = new BarDataSet(barOne, "barOne");
-        set1.setColor(ContextCompat.getColor(GroupedBarChartActivity.this,R.color.common_color_blue));
+        set1.setColor(ContextCompat.getColor(GroupedBarChartActivity.this, R.color.common_color_blue));
         BarDataSet set2 = new BarDataSet(barTwo, "barTwo");
-        set2.setColor(ContextCompat.getColor(GroupedBarChartActivity.this,R.color.common_color_green_a2));
+        set2.setColor(ContextCompat.getColor(GroupedBarChartActivity.this, R.color.common_color_green_a2));
 
 
         set1.setHighlightEnabled(false);
@@ -149,19 +201,14 @@ public class GroupedBarChartActivity extends AppCompatActivity {
         dataSets.add(set2);
 
         //(barSpace+barWidth)*柱形图数量+groupSpace=1
-
         BarData data = new BarData(dataSets);
-        float groupSpace = 0.6f;
-        float barSpace = 0.04f;
-        float barWidth = 0.15f;
+        float groupSpace = 0.4f;
+        float barSpace = 0.1f;
+        float barWidth = 0.2f;
 
-        // (barSpace + barWidth) * 5 + groupSpace = 1
-        // multiplied by 5 because there are 5 five bars
-        // labels will be centered as long as the equation is satisfied
         data.setBarWidth(barWidth);
         barChart.setData(data);
-        barChart.setScaleEnabled(false);
-        barChart.groupBars(0f, groupSpace, barSpace);
+        barChart.groupBars(0, groupSpace, barSpace);
         barChart.invalidate();
     }
 

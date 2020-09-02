@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.zzti.fengyongge.mpandroidchart.combinedchart.CombinedChartActivity;
+import com.zzti.fengyongge.mpandroidchart.groupbarchart.GroupedBarChartActivity;
 import com.zzti.fengyongge.mpandroidchart.linechart.LineChartActivity;
 import com.zzti.fengyongge.mpandroidchart.piechart.PieChartActivity;
 
